@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Automation Suite" verbose="2" parallel="classes" thread-count="3"
+       configfailurepolicy="continue">
+
+    <listeners>
+        <listener class-name="com.freecharge.browsersetup.WebDriverListener"/>
+    </listeners>
+
+    <test name="Add to cart" enabled="true">
+        <parameter name="OS_Browser" value="Win_Chrome"/>
+        <parameter name="URL" value="https://www.myntra.com/"/>
+        <classes>
+            <class name="com.freecharge.tests.myntra.AddToCart"/>
+        </classes>
+    </test>
+
+</suite>
