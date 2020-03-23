@@ -13,8 +13,6 @@ import org.testng.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -139,7 +137,7 @@ public class WebDriverListener implements IExecutionListener, IInvokedMethodList
      * @return failure screenshot folder path and image name
      * @throws IOException while copying file to folder
      */
-    private String capture(WebDriver driver, String screenShotName) throws IOException {
+    private String capture(WebDriver driver, String screenShotName) {
         screenShotName = screenShotName + ".png";
         String todayAsString = new SimpleDateFormat("dd-MM-yyyy/").format(new Date());
         String directory = REPORTS_LOC + todayAsString;

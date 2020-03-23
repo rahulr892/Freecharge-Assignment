@@ -16,7 +16,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-server
     compile group: 'org.seleniumhq.selenium', name: 'selenium-server', version: '3.141.59'
     // https://mvnrepository.com/artifact/org.testng/testng
-    testCompile group: 'org.testng', name: 'testng', version: '7.1.0'
+    compile group: 'org.testng', name: 'testng', version: '7.1.0'
     // https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager
     compile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '3.8.1'
     // https://mvnrepository.com/artifact/com.aventstack/extentreports
@@ -32,7 +32,7 @@ dependencies {
     // https://mvnrepository.com/artifact/com.jcraft/jsch
     compile group: 'com.jcraft', name: 'jsch', version: '0.1.54'
     // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
-    testCompile group: 'io.rest-assured', name: 'rest-assured', version: '4.3.0'
+    compile group: 'io.rest-assured', name: 'rest-assured', version: '4.3.0'
     // https://mvnrepository.com/artifact/org.json/json
     compile group: 'org.json', name: 'json', version: '20190722'
 
@@ -40,4 +40,14 @@ dependencies {
 
 test {
     useTestNG()
+}
+
+task runTests(type: JavaExec, dependsOn: 'classes') {
+    main = 'org.testng.TestNG'
+    classpath = files("./src/test/resources",
+                      project.sourceSets.main.compileClasspath,
+                      project.sourceSets.test.compileClasspath,
+                      project.sourceSets.main.runtimeClasspath,
+                      project.sourceSets.test.runtimeClasspath)
+    args = ["-parallel",  "classes", "-threadcount", "3", "-d", "./build/test-output", "./src/test/resources/testng.xml"]
 }
