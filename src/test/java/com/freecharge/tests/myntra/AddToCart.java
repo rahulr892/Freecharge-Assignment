@@ -1,21 +1,39 @@
 package com.freecharge.tests.myntra;
 
 import com.freecharge.browsersetup.TLDriver;
+import com.freecharge.constants.Constants;
+import com.freecharge.excelreader.TestUtils;
+import com.freecharge.excelreader.Xls_Reader;
 import com.freecharge.pages.*;
 import org.testng.ITestContext;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.Hashtable;
+
 public class AddToCart {
+
+    private final static String testData = Constants.TESTDATA_LOC;
+    private static Xls_Reader xls = new Xls_Reader(testData);
+
+    /**
+     * @return test data from TestData.xlsx
+     */
+    @DataProvider
+    private Object[][] getTestData() {
+        System.out.println("Executing DataProvider");
+        return TestUtils.getData("Myntra", xls);
+    }
 
     /*############################################################
      * ' Function Name: addToCartWorkflow
      * ' Purpose: Adding product to cart workflow test
      */
-    @Test(priority = 1, description = "Myntra - Add to cart workflow")
-    public void addToCartWorkflow(ITestContext context) {
+    @Test(dataProvider = "getTestData", description = "Myntra - Add to cart workflow")
+    public void addToCartWorkflow(Hashtable<String, String> data, ITestContext context) {
         String searchText = "kurta";
         int productIndex = 0;
-        String email = "akshah911@gmail.com";
+        String email = TestUtils.getTestData(data, "email");
 
         String url = context.getCurrentXmlTest().getParameter("URL");
         TLDriver.getDriver().get(url);
@@ -28,7 +46,7 @@ public class AddToCart {
         Login_Page loginPage = new Login_Page();
         loginPage.waitForLoginPageLoad()
                 .validatePageTitle()
-                .typeEmailAndPassword(email, "9867985991")
+                .typeEmailAndPassword(email, TestUtils.getTestData(data, "password"))
                 .clickLoginButton();
 
         landingPage.waitForLandingPage()

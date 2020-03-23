@@ -1,6 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Automation Suite" verbose="2" parallel="classes" thread-count="3"
-       configfailurepolicy="continue">
+<suite name="Automation Suite" parallel="classes" thread-count="3" configfailurepolicy="continue">
 
     <listeners>
         <listener class-name="com.freecharge.browsersetup.WebDriverListener"/>
