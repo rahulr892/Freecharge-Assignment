@@ -1,6 +1,6 @@
 # Freecharge-Assignment
 
-1. Run testng.xml file under src/test/resources as TestNG.xml
+1. Run "gradle runTests" from root folder via cmd line to run tests
 2. Add to cart for myntra script is under src/test/java/com/freecharge/tests/myntra/AddToCart.java
 
 3. Framework itself is thread-safe and can tests in parallel following page factory design pattern
