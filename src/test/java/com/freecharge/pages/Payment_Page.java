@@ -43,7 +43,7 @@ public class Payment_Page extends PageBase {
 
     public Payment_Page validateTotalPriceFromCheckoutPage(int price) {
         ExtentUtil.fetchTest().log(Status.INFO, "Validating total price is equal to the checkout page total");
-        int totalPrice = Integer.parseInt(getText(total_price_label));
+        int totalPrice = Integer.parseInt(getText(total_price_label).replace(",", ""));
         Assert.assertEquals(totalPrice, price, "Total price from checkout page and payment page does not match");
         return this;
     }
