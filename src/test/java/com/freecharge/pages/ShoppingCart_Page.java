@@ -49,15 +49,15 @@ public class ShoppingCart_Page extends PageBase {
     public ShoppingCart_Page validateProductDetailsInCart(String name, String price) {
         ExtentUtil.fetchTest().log(Status.INFO, "Validating product details in cart");
         verifyEquals(getText(product_name_label), name, "Product name does not match");
-        verifyEquals(getText(product_price_label), price, "Product price does not match");
+        verifyEquals(getText(product_price_label).replace(",", ""), price, "Product price does not match");
         return this;
     }
 
 
     public int validateTotalPriceGreaterOrEqualToCartTotal() {
         ExtentUtil.fetchTest().log(Status.INFO, "Validate total price is greater than or equal to the cart total");
-        int productPrice = Integer.parseInt(getText(product_price_label));
-        int totalPrice = Integer.parseInt(getText(total_price_label));
+        int productPrice = Integer.parseInt(getText(product_price_label).replace(",", ""));
+        int totalPrice = Integer.parseInt(getText(total_price_label).replace(",", ""));
         verifyIsTrue(totalPrice >= productPrice, "Total price greater or equal to cart total failed");
         return totalPrice;
     }
